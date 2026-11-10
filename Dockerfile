@@ -14,10 +14,11 @@ COPY --from=frontend /src/backend/web ./web
 RUN CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /trainer .
 
 FROM alpine:3.22
-RUN apk add --no-cache ca-certificates tzdata && addgroup -g 10001 trainer && adduser -D -u 10001 -G trainer trainer && mkdir -p /app/data && chown trainer:trainer /app/data
+RUN apk add --no-cache ca-certificates tzdata su-exec && addgroup -g 10001 trainer && adduser -D -u 10001 -G trainer trainer && mkdir -p /app/data && chown trainer:trainer /app/data
 WORKDIR /app
 COPY --from=backend /trainer ./trainer
-USER trainer
+COPY container-entrypoint.sh ./container-entrypoint.sh
 ENV HTTP_ADDR=:8080 DATA_DIR=/app/data TZ=Asia/Riyadh
 EXPOSE 8080
+ENTRYPOINT ["/bin/sh", "/app/container-entrypoint.sh"]
 CMD ["./trainer"]
