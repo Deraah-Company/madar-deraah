@@ -1,0 +1,3 @@
+// Optional cache path is only for local builds; standard npm installs need no override.
+const cached=process.env.TRAINER_BUILD_MODULES;
+export default {resolve:cached?{alias:[{find:'react-dom/client',replacement:cached+'/react-dom/client.js'},{find:'react/jsx-runtime',replacement:cached+'/react/jsx-runtime.js'},{find:'react',replacement:cached+'/react/index.js'},{find:'lucide-react',replacement:cached+'/lucide-react/dist/esm/lucide-react.js'}]}:{},build:{outDir:'../backend/web',emptyOutDir:false,rollupOptions:{input:{portal:'index.html',pulse:'pulse.html'}}},server:{proxy:{'/api':'http://127.0.0.1:8093','/files':'http://127.0.0.1:8093'}}};

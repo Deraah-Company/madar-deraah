@@ -1,0 +1,312 @@
+{
+  "categories": [
+    {
+      "id": "rewards",
+      "name": {
+        "ar": "عدالة الأجور والمزايا",
+        "en": "Pay and benefits"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "rewards_1",
+          "text": {
+            "ar": "أرى أن إجمالي ما أحصل عليه يناسب مسؤولياتي الوظيفية",
+            "en": "My total reward is appropriate for my responsibilities"
+          },
+          "required": true
+        },
+        {
+          "id": "rewards_2",
+          "text": {
+            "ar": "المزايا المتاحة لي تساعدني على تلبية احتياجاتي الأساسية",
+            "en": "The benefits available to me support my essential needs"
+          },
+          "required": true
+        },
+        {
+          "id": "rewards_3",
+          "text": {
+            "ar": "أفهم القواعد التي تعتمد عليها الشركة في احتساب الحوافز",
+            "en": "I understand the rules used to calculate my incentives"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "growth",
+      "name": {
+        "ar": "التعلم والتطور المهني",
+        "en": "Learning and career growth"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "growth_1",
+          "text": {
+            "ar": "تتاح لي فرص عملية لاكتساب مهارات جديدة تفيد عملي",
+            "en": "I can build new skills that help me perform my work"
+          },
+          "required": true
+        },
+        {
+          "id": "growth_2",
+          "text": {
+            "ar": "أعرف الخطوات المطلوبة للاستعداد لفرص وظيفية أعلى",
+            "en": "I know what I need to do to prepare for future career opportunities"
+          },
+          "required": true
+        },
+        {
+          "id": "growth_3",
+          "text": {
+            "ar": "أتلقى مساعدة واضحة لتحويل احتياجاتي التطويرية إلى خطوات عملية",
+            "en": "I receive practical support to act on my development needs"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "manager",
+      "name": {
+        "ar": "دعم المدير المباشر",
+        "en": "Direct manager support"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "manager_1",
+          "text": {
+            "ar": "يتعامل مديري مع احتياجاتي وظروفي باحترام",
+            "en": "My manager treats my needs and circumstances with respect"
+          },
+          "required": true
+        },
+        {
+          "id": "manager_2",
+          "text": {
+            "ar": "ملاحظات مديري تساعدني على تحسين أدائي بصورة واضحة",
+            "en": "My manager gives feedback that helps me improve my performance"
+          },
+          "required": true
+        },
+        {
+          "id": "manager_3",
+          "text": {
+            "ar": "عندما تواجهني عقبة في العمل أجد من مديري مساعدة مناسبة",
+            "en": "My manager provides useful support when I encounter work obstacles"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "leadership",
+      "name": {
+        "ar": "القيادة ووضوح الاتجاه",
+        "en": "Leadership and direction"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "leadership_1",
+          "text": {
+            "ar": "تصلني معلومات واضحة عن أولويات الشركة المقبلة",
+            "en": "I receive clear information about the company's upcoming priorities"
+          },
+          "required": true
+        },
+        {
+          "id": "leadership_2",
+          "text": {
+            "ar": "أجد تفسيرات كافية للقرارات التي تؤثر على عملي",
+            "en": "I receive adequate explanations for decisions that affect my work"
+          },
+          "required": true
+        },
+        {
+          "id": "leadership_3",
+          "text": {
+            "ar": "أرى أن سلوك القيادات يعكس القيم المعلنة للشركة",
+            "en": "I see leaders demonstrate the company's stated values in practice"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "culture",
+      "name": {
+        "ar": "العدالة والانتماء",
+        "en": "Fairness and belonging"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "culture_1",
+          "text": {
+            "ar": "أشعر أن لي مكانًا وصوتًا مسموعًا داخل الشركة",
+            "en": "I feel that I have a place and a voice within the company"
+          },
+          "required": true
+        },
+        {
+          "id": "culture_2",
+          "text": {
+            "ar": "تطبق القواعد على الموظفين بصورة عادلة ومتسقة",
+            "en": "Workplace rules are applied fairly and consistently"
+          },
+          "required": true
+        },
+        {
+          "id": "culture_3",
+          "text": {
+            "ar": "أستطيع طرح رأيي باحترام دون خوف من معاملة سلبية",
+            "en": "I can share a respectful opinion without fear of negative treatment"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "wellbeing",
+      "name": {
+        "ar": "عبء العمل والرفاه",
+        "en": "Workload and wellbeing"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "wellbeing_1",
+          "text": {
+            "ar": "يسمح تنظيم عملي بالحفاظ على وقت مناسب لحياتي الشخصية",
+            "en": "My work arrangements allow reasonable time for my personal life"
+          },
+          "required": true
+        },
+        {
+          "id": "wellbeing_2",
+          "text": {
+            "ar": "أستطيع إنجاز المهام المطلوبة خلال وقت العمل المتاح",
+            "en": "I can complete my assigned tasks within the available working time"
+          },
+          "required": true
+        },
+        {
+          "id": "wellbeing_3",
+          "text": {
+            "ar": "عندما أحتاج دعمًا متعلقًا بالرفاه أعرف كيف أحصل عليه",
+            "en": "I know how to access wellbeing support when I need it"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "recognition",
+      "name": {
+        "ar": "التقدير",
+        "en": "Recognition"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "recognition_1",
+          "text": {
+            "ar": "يحظى الجهد الإضافي الذي أبذله بتقدير مناسب",
+            "en": "The extra effort I contribute receives appropriate appreciation"
+          },
+          "required": true
+        },
+        {
+          "id": "recognition_2",
+          "text": {
+            "ar": "تستخدم معايير واضحة عند تقدير مساهمات الموظفين",
+            "en": "Clear criteria are used when recognizing employee contributions"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "resources",
+      "name": {
+        "ar": "الأدوات والصلاحيات",
+        "en": "Tools and autonomy"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "resources_1",
+          "text": {
+            "ar": "تتوفر لدي الأنظمة والمعلومات اللازمة لإنجاز عملي",
+            "en": "I have access to the systems and information needed for my work"
+          },
+          "required": true
+        },
+        {
+          "id": "resources_2",
+          "text": {
+            "ar": "الصلاحيات المتاحة لي تتناسب مع المسؤوليات المطلوبة مني",
+            "en": "My decision-making authority matches my work responsibilities"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "purpose",
+      "name": {
+        "ar": "وضوح الدور والمعنى",
+        "en": "Role clarity and purpose"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "purpose_1",
+          "text": {
+            "ar": "أستطيع الربط بين مهامي اليومية وأهداف الشركة",
+            "en": "I can connect my daily tasks to the company's goals"
+          },
+          "required": true
+        },
+        {
+          "id": "purpose_2",
+          "text": {
+            "ar": "أرى أثرًا مفيدًا للعمل الذي أقدمه",
+            "en": "I can see the useful impact of the work I contribute"
+          },
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "collaboration",
+      "name": {
+        "ar": "التعاون بين الفرق",
+        "en": "Team collaboration"
+      },
+      "track": "all",
+      "questions": [
+        {
+          "id": "collaboration_1",
+          "text": {
+            "ar": "يساعد التنسيق بين الإدارات على إنجاز العمل دون تعطيل",
+            "en": "Coordination between departments helps work move forward"
+          },
+          "required": true
+        },
+        {
+          "id": "collaboration_2",
+          "text": {
+            "ar": "أجد تعاونًا مناسبًا من زملائي عند الحاجة",
+            "en": "I receive useful cooperation from colleagues when needed"
+          },
+          "required": true
+        }
+      ]
+    }
+  ]
+}

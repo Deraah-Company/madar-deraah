@@ -1,0 +1,6 @@
+.env
+data/
+frontend/node_modules/
+frontend/*.tsbuildinfo
+windows/*.exe
+*.log

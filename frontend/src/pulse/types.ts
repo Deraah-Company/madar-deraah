@@ -1,0 +1,14 @@
+export type Lang='ar'|'en';
+export type Text={ar:string;en:string};
+export type Role='admin'|'analyst'|'viewer';
+export type User={id:string;email:string;name:string;role:Role;active:boolean;can_edit?:boolean;can_results?:boolean;can_plan?:boolean;can_review?:boolean;can_publish?:boolean};
+export type Question={id:string;text:Text;required:boolean};
+export type Category={id:string;name:Text;track:'all'|'commercial'|'administrative';questions:Question[]};
+export type Survey={id:string;title:Text;description:Text;definition:{categories:Category[]};status:'draft'|'published'|'closed';expected_count:number;excellent:number;good:number;opens_at:string|null;closes_at:string|null;response_count:number;created_at:string;employee_visible?:boolean};
+export type Segment={id:string;label:Text;site:string;track:string};
+export type Invite={id:string;segment_id:string;prefix:string;mode:string;active:boolean;used:boolean};
+export type Metric={count:number|null;enps:number|null;promoters:number|null;passives:number|null;detractors:number|null;suppressed:boolean};
+export type Driver={id:string;name:Text;track:string;average:number|null;favorable:number|null;respondents:number|null};
+export type Group=Metric&{label:Text};
+export type Analytics={survey_id:string;status:string;response_count:number;expected_count:number;release:string;overall:Metric;drivers:Driver[];themes:{word:string;count:number}[]};
+export type Plan={id:string;survey_id:string;domain:string;title:string;owner_id:string;owner:string;due_date:string;status:'planned'|'in_progress'|'done';notes:string};

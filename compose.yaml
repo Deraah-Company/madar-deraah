@@ -1,0 +1,33 @@
+services:
+  pathways:
+    build: .
+    ports:
+      - "${APP_BIND:-127.0.0.1}:8093:8080"
+    environment:
+      APP_ORIGIN: "${APP_ORIGIN:-http://localhost:8093}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL:-admin@deraah.local}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:?Run Setup.ps1 before first start}"
+      DATABASE_URL: "postgres://pathways:${POSTGRES_PASSWORD:?Run Setup.ps1 before first start}@db:5432/pathways?sslmode=disable"
+    volumes:
+      - pathways_uploads:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: pathways
+      POSTGRES_USER: pathways
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?Run Setup.ps1 before first start}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pathways -d pathways"]
+      interval: 4s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - pathways_postgres:/var/lib/postgresql/data
+    restart: unless-stopped
+volumes:
+  pathways_uploads:
+  pathways_postgres:

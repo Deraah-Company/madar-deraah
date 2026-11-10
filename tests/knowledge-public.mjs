@@ -1,0 +1,68 @@
+import assert from 'node:assert/strict';
+import {randomBytes} from 'node:crypto';
+
+const origin=process.env.TEST_ORIGIN||'http://localhost:8093';
+const email=process.env.TEST_ADMIN_EMAIL;
+const password=process.env.TEST_ADMIN_PASSWORD;
+assert.ok(email&&password,'Set TEST_ADMIN_EMAIL and TEST_ADMIN_PASSWORD');
+const suffix=randomBytes(4).toString('hex');
+async function request(path,{method='GET',data,cookie,status=200}={}){
+ const headers={Origin:origin,...(cookie?{Cookie:cookie}:{})};
+ if(data!==undefined&&!(data instanceof FormData))headers['Content-Type']='application/json';
+ const response=await fetch(origin+path,{method,headers,body:data instanceof FormData?data:data===undefined?undefined:JSON.stringify(data)});
+ const text=await response.text();
+ assert.equal(response.status,status,text);
+ return {data:JSON.parse(text),cookie:response.headers.get('set-cookie')?.split(';')[0]};
+}
+const {cookie}=await request('/api/login',{method:'POST',data:{email,password}});
+const act=(action,data,status=200)=>request('/api/action',{method:'POST',cookie,data:{action,data},status});
+const publicPath='/api/public/knowledge';
+assert.match(await (await fetch(origin+'/knowledge/apply')).text(),/<div id="root">/);
+const admin=(await request('/api/portal',{cookie})).data.me;
+const today=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Riyadh'}).format(new Date());
+const title='QA public application '+suffix;
+const campaign={title,goal:'Public application across departments',policy:'Open to all employees',opens:today,deadline:today,status:'open',
+ panel:[],rubric:[{id:'quality',label:'Quality',weight:100}],questions:[{id:'example',label:'Example',required:true}]};
+await act('trainer.campaign',campaign);
+const deptName='QA department '+suffix;
+await act('system.department',{name:deptName});
+const guestForm=({department,material=false})=>{
+ const form=new FormData();
+ for(const [key,value] of Object.entries({campaign:id,department,name:'Test Employee',email:'guest@example.test',employee:'QA-'+suffix,topic:'Practical example',outline:'Explain and practice','extra-example':'Example answer'}))form.set(key,value);
+ if(material)form.set('file',new Blob(['%PDF-1.4 fixture'],{type:'application/pdf'}),'material.pdf');
+ return form;
+};
+const publicData=(await request(publicPath)).data;
+const selected=publicData.campaigns.find(c=>c.title===title);
+assert.ok(selected);
+const id=selected.id;
+assert.equal(selected.panel,undefined);
+assert.equal(selected.rubric,undefined);
+assert.equal(publicData.account,null);
+const department=publicData.departments.find(d=>d.name===deptName);
+assert.ok(department);
+await request(publicPath,{method:'POST',data:guestForm({department:'invalid'}),status:400});
+const result=(await request(publicPath,{method:'POST',data:guestForm({department:department.id,material:true}),status:201})).data;
+await request(publicPath,{method:'POST',data:guestForm({department:department.id}),status:400});
+let trainer=(await request('/api/trainer',{cookie})).data;
+const application=trainer.applications.find(a=>a.id===result.id);
+assert.equal(application.name,'Test Employee');
+assert.equal(application.department,deptName);
+assert.equal(application.answers.example,'Example answer');
+assert.equal(application.guest.email,'guest@example.test');
+assert.ok(application.material);
+assert.equal((await fetch(origin+'/files/'+application.material)).status,401);
+const attachment=await fetch(origin+'/files/'+application.material,{headers:{Cookie:cookie}});
+assert.equal(attachment.status,200);
+assert.match(await attachment.text(),/^%PDF/);
+assert.equal(trainer.departments.find(d=>d.id===department.id&&d.campaign===id).applied,1);
+await act('trainer.decide',{id:result.id,status:'accepted',note:'Complete'},400);
+await act('trainer.campaign',{...campaign,id,panel:[admin.id]});
+await act('trainer.evaluate',{id:result.id,ratings:{quality:5},note:'Good'});
+await act('trainer.decide',{id:result.id,status:'accepted',note:'Complete'});
+trainer=(await request('/api/trainer',{cookie})).data;
+assert.equal(trainer.departments.find(d=>d.id===department.id&&d.campaign===id).accepted,1);
+await act('trainer.campaign',{...campaign,id,panel:[admin.id],status:'closed'});
+assert.ok(!(await request(publicPath)).data.campaigns.some(c=>c.id===id));
+await request(publicPath,{method:'POST',data:guestForm({department:department.id}),status:400});
+console.log('Verified open application without committee, new department, anonymous public form, material permissions, duplicate rejection, later committee decision, reports and closed round.');
